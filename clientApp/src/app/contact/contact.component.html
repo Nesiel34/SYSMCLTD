@@ -1,0 +1,28 @@
+<form [formGroup]="fgContact">
+  <mat-form-field appearance="outline">
+    <mat-label>contact name</mat-label>
+    <input matInput formControlName="FullName" placeholder="contact name">
+    <mat-error *ngIf="getFormControlError('FullName').invalid">this field is required</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Office Number</mat-label>
+    <input matInput formControlName="OfficeNumber" placeholder="Office Number" OnlyNumber>
+  </mat-form-field>
+
+
+  <mat-form-field appearance="outline">
+    <mat-label>Email</mat-label>
+    <input matInput formControlName="Email" placeholder="Email">
+  </mat-form-field>
+
+
+
+  <mat-form-field appearance="outline" *ngIf="_contact?.id">
+    <mat-label>created</mat-label>
+    <input matInput formControlName="created" placeholder="created">
+  </mat-form-field>
+
+  <mat-slide-toggle formControlName="isDeleted"  *ngIf="_contact?.id">deleted</mat-slide-toggle>
+  <button mat-button (click)="saveContact()" *ngIf="_contact.id==0">save contact</button>
+  </form>

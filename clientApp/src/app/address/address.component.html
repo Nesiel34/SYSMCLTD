@@ -1,0 +1,22 @@
+<form [formGroup]="fgAddress">
+  <mat-form-field appearance="outline">
+    <mat-label>city</mat-label>
+    <input matInput formControlName="City" placeholder="city">
+    <mat-error *ngIf="getFormControlError('City').invalid">this field is required</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>street</mat-label>
+    <input matInput formControlName="Street" placeholder="street">
+    <mat-error *ngIf="getFormControlError('Street').invalid">this field is required</mat-error>
+  </mat-form-field>
+
+
+  <mat-form-field appearance="outline" *ngIf="_address">
+    <mat-label>created</mat-label>
+    <input matInput formControlName="created" placeholder="created">
+  </mat-form-field>
+  <mat-slide-toggle formControlName="isDeleted">deleted</mat-slide-toggle>
+
+
+  </form>

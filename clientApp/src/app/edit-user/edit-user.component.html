@@ -1,0 +1,54 @@
+<form [formGroup]="fgUser">
+  <mat-form-field appearance="outline">
+    <mat-label>name</mat-label>
+    <input matInput formControlName="name" placeholder="name">
+    <mat-error *ngIf="getFormControlError('name').invalid">
+      <em *ngIf="getFormControlError('name').hasError('required')">
+        this field is required
+     </em>
+     <em *ngIf="getFormControlError('name').hasError('duplicate')">
+      That user is exits
+    </em>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>customer number</mat-label>
+    <input type="text" matInput formControlName="customerNumber" placeholder="customer number" OnlyNumber [maxlength]="9">
+    <mat-error *ngIf="getFormControlError('customerNumber').invalid">
+      <em *ngIf="getFormControlError('customerNumber').hasError('required')">
+        this field is required
+     </em>
+     <em *ngIf="getFormControlError('customerNumber').hasError('minlength')">
+      this is field minimum of 9 characters
+   </em>
+  </mat-error>
+  </mat-form-field>
+
+
+  <mat-form-field appearance="outline" *ngIf="_valueForm">
+    <mat-label>created</mat-label>
+    <input matInput formControlName="created" placeholder="created">
+  </mat-form-field>
+  <mat-slide-toggle formControlName="isDeleted" *ngIf="_valueForm">deleted</mat-slide-toggle>
+<br/>
+  <button mat-button (click)="saveCustomer()">save customer</button>
+
+  <ng-container *ngIf="_valueForm">
+    <h2>
+      Address
+    </h2>
+    <hr/>
+    <ng-container *ngFor="let address of address">
+      <app-address [address]="address"></app-address>
+    </ng-container>
+    <h2>
+      Contact
+    </h2>
+    <button mat-button (click)="addContact()">add contact</button>
+    <ng-container *ngFor="let contact of contact">
+      <app-contact [contact]="contact"></app-contact>
+    </ng-container>
+  </ng-container>
+  <button class="close" mat-button (click)="closeWindow()">close window</button>
+  </form>
